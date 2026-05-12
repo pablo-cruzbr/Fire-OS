@@ -2,27 +2,34 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const token = req.cookies.get("session")?.value;
+
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/static") ||
     pathname === "/" ||
+    pathname === "/AreadeUsuario" || 
     pathname.includes(".")
   ) {
     return NextResponse.next();
   }
 
-  const token = req.cookies.get("session")?.value;
-  if (pathname.startsWith("/dashboard") || pathname.startsWith("/AreadeUsuario")) {
+  const isProtectedRoute = 
+    pathname.startsWith("/dashboard") || 
+    pathname.startsWith("/AreadeUsuario/"); 
+
+  if (isProtectedRoute) {
     if (!token) {
-      return NextResponse.redirect(new URL("/", req.url));
+      const redirectUrl = pathname.startsWith("/dashboard") ? "/" : "/AreadeUsuario";
+      return NextResponse.redirect(new URL(redirectUrl, req.url));
     }
 
     const isValid = await validateToken(token);
 
     if (!isValid) {
-      const response = NextResponse.redirect(new URL("/", req.url));
+      const response = NextResponse.redirect(new URL(pathname.startsWith("/dashboard") ? "/" : "/AreadeUsuario", req.url));
       response.cookies.delete("session");
-      response.cookies.delete("role"); 
+      response.cookies.delete("role");
       return response;
     }
   }
@@ -49,10 +56,11 @@ async function validateToken(token: string) {
     return !!data?.id; 
 
   } catch (err) {
-    console.error("❌ Middleware Auth Error (Backend Offline?):", err);
+    console.error("❌ Middleware Auth Error:", err);
     return false;
   }
 }
+
 export const config = {
   matcher: [
     "/dashboard/:path*", 
