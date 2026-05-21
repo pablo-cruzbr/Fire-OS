@@ -31,19 +31,21 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
 
   const [selectedEvent, setSelectedEvent] = useState<SchedulerEvent | null>(null);
 
-  const parseToScheduler = useCallback((data: any[]) => {
-    return data.map((os: any) => ({
+ const parseToScheduler = useCallback((data: any[]) => {
+  return data.map((os: any) => {
+    const startDate = new Date(os.created_at);
+    
+    return {
       id: os.id,
       text: `OS ${os.numeroOS}: ${os.cliente?.name || "Chamado"}`,
-      start_date: new Date(os.created_at),
-      end_date: os.endedAt 
-        ? new Date(os.endedAt) 
-        : new Date(new Date(os.created_at).getTime() + 60 * 60 * 1000),
+      start_date: startDate,
+      // Forçamos o fim a ser apenas 30 minutos após o início do mesmo dia
+      end_date: new Date(startDate.getTime() + 30 * 60 * 1000), 
       color: os.statusOrdemdeServico?.name === "CONCLUIDA" ? "#10b981" : "#f59e0b",
-      status: os.statusOrdemdeServico?.name,
-      description: os.descricaodoProblemaouSolicitacao
-    }));
-  }, []);
+      rawTicket: os
+    };
+  });
+}, []);
 
   const fetchOrders = useCallback(async (token: string) => {
     if (!schedulerInstance.current) return;
