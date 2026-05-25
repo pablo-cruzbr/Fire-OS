@@ -118,6 +118,49 @@ $transition-fast: 0.3s ease;
     justify-content: center;
   }
 
+  // --- ALTERAÇÕES AQUI ---
+  input, .select, textarea {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000; // Trocado para preto puro
+    width: 100%;
+
+    // Adicionado para corrigir o preenchimento automático (autofill)
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #000000 !important;
+      -webkit-box-shadow: 0 0 0px 1000px $bg-input inset !important; // Usa sua variável de fundo
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &::placeholder { color: #aaa; }
+  }
+
+  &.textArea {
+    height: auto;
+    min-height: 120px;
+    border-radius: 20px;
+    align-items: flex-start;
+    padding: 15px 1rem;
+
+    textarea {
+      height: 100px;
+      resize: none;
+      line-height: 1.5;
+    }
+  }
+}
+  .icon {
+    color: #acacac;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+  }
+
   input, .select, textarea {
     border: none;
     outline: none;
@@ -143,7 +186,7 @@ $transition-fast: 0.3s ease;
       line-height: 1.5;
     }
   }
-}
+
 
 // --- PAINEL ROXO (ESQUERDA) ---
 .panelsContainer {

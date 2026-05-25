@@ -128,12 +128,20 @@
     background: transparent;
     font-size: 1.1rem;
     font-weight: 500;
-    color: #333;
+    color: #000000;
     resize: none;
     padding-top: 8px;
 
     &::placeholder {
-      color: #aaa;
+      color: #000000;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #000000 !important;
+      -webkit-box-shadow: 0 0 0px 1000px #f0f0f0 inset !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
   }
 
@@ -149,10 +157,19 @@
     background: none;
     font-size: 1.1rem;
     font-weight: 500;
-    color: #333;
+    color: #000000;
 
     &::placeholder {
       color: #aaa;
+    }
+
+    // Corrige a cor do texto no autofill do input
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #000000 !important;
+      -webkit-box-shadow: 0 0 0px 1000px #f0f0f0 inset !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
   }
 }
