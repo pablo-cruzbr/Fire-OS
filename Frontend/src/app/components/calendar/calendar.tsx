@@ -24,7 +24,9 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
   
   const parseToScheduler = useCallback((data: any[]) => {
     return data.map((os: any) => {
-      const startDate = new Date(os.created_at);
+    const startDate = os.agendadoEm          
+      ? new Date(os.agendadoEm)
+      : new Date(os.created_at);
       
       return {
         id: os.id,
@@ -44,7 +46,8 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
     try {
       await api.patch(`/ordens/${ev.id}`, {
         created_at: ev.start_date,
-        endedAt: ev.end_date
+        endedAt: ev.end_date,
+        agendadoEm: ev.start_date,
       }, { headers: { Authorization: `Bearer ${token}` }});
     } catch (err) {
       console.error("Erro ao atualizar data:", err);
