@@ -105,6 +105,7 @@ $transition-fast: 0.3s ease;
   padding: 0 1rem;
   align-items: center;
   transition: $transition-fast;
+  margin-bottom: 15px; 
 
   &:focus-within {
     background-color: darken($bg-input, 3%);
@@ -118,29 +119,27 @@ $transition-fast: 0.3s ease;
     justify-content: center;
   }
 
-  // --- ALTERAÇÕES AQUI ---
   input, .select, textarea {
     border: none;
     outline: none;
     background: none;
     font-size: 1rem;
     font-weight: 500;
-    color: #000000; // Trocado para preto puro
+    color: #000000;
     width: 100%;
 
-    // Adicionado para corrigir o preenchimento automático (autofill)
     &:-webkit-autofill,
     &:-webkit-autofill:hover, 
     &:-webkit-autofill:focus {
       -webkit-text-fill-color: #000000 !important;
-      -webkit-box-shadow: 0 0 0px 1000px $bg-input inset !important; // Usa sua variável de fundo
+      -webkit-box-shadow: 0 0 0px 1000px $bg-input inset !important;
       transition: background-color 5000s ease-in-out 0s;
     }
 
     &::placeholder { color: #aaa; }
   }
 
-.textArea {
+  &.textArea {
     height: auto;
     min-height: 120px;
     border-radius: 20px;
