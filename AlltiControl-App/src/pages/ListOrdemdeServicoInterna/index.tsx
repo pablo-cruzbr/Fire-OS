@@ -241,7 +241,7 @@ export default function ListOrdemdeServicoInterna() {
       {/* Header */}
       <View style={styles.header}>
         <Image
-          source={require("../../assets/logoperfil.png")}
+          source={require("../../assets/logoperfil2.png")}
           style={styles.profileImage}
         />
         <Text style={styles.title}>Tickets Internos</Text>
