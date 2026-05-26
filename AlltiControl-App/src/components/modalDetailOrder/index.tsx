@@ -563,14 +563,6 @@ const handleCloseAndComplete = async () => {
   }
 };
 const isDisabled = selectedImages.length === 0;
-<SignatureModal 
-          visible={showSignatureModal}
-          onClose={() => setShowSignatureModal(false)}
-          onSave={(sig) => {
-            setSignature(sig);
-            setShowSignatureModal(false);
-          }}
-        />
 
   return (
     <>
@@ -786,31 +778,17 @@ const isDisabled = selectedImages.length === 0;
       />
 
       <Modal
-        visible={modalTecnicoOpen} 
+        visible={modalTecnicoOpen}
         animationType="slide"
         transparent={true}
         onRequestClose={() => setModalTecnicoOpen(false)}
       >
-        <ModalDetailOrderFormTecnico 
-          ordemId={ordemAtual.id} 
-          tempoFinal={time} 
-          handleCloseModal={() => setModalTecnicoOpen(false)} 
+        <ModalDetailOrderFormTecnico
+          ordemId={ordemAtual.id}
+          tempoFinal={time}
+          handleCloseModal={() => setModalTecnicoOpen(false)}
         />
       </Modal>
-
-
-<Modal
-          visible={modalTecnicoOpen} 
-          animationType="slide"
-          transparent={true}
-          onRequestClose={() => setModalTecnicoOpen(false)}
-        >
-          <ModalDetailOrderFormTecnico 
-            ordemId={ordemAtual.id} 
-            tempoFinal={time} 
-            handleCloseModal={() => setModalTecnicoOpen(false)} 
-          />
-        </Modal>
     </>
   );
 }
