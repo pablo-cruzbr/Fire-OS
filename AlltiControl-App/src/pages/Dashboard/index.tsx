@@ -418,11 +418,6 @@ console.log("DADOS COMPLETOS:", JSON.stringify(response.data.controles, null, 2)
         />
       </Modal>
 
-     
-      <TouchableOpacity style={styles.fabLogout} onPress={signOut}>
-        <Feather name="log-in" size={28} color="#fff" />
-      </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.fabSecondary}
         onPress={() => navigation.navigate("ListOrdemdeServicoInterna" as never)}
