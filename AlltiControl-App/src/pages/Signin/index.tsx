@@ -118,14 +118,24 @@ export default function Signin() {
 
         {!!errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          {loadingAuth ? (
-            <ActivityIndicator size={25} color={"#FFF"} />
-          ) : (
-            <Text style={styles.buttonText}>Acessar</Text>
-          )}
+        <TouchableOpacity
+          style={[styles.button, loadingAuth && styles.buttonDisabled]}
+          onPress={handleLogin}
+          activeOpacity={0.85}
+          disabled={loadingAuth}
+        >
+          <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
       </View>
+
+      {loadingAuth && (
+        <View style={styles.loadingOverlay}>
+          <View style={styles.loadingBox}>
+            <ActivityIndicator size={48} color="#4E3182" />
+            <Text style={styles.loadingText}>Entrando...</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -237,5 +247,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     textTransform: "uppercase",
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  loadingOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.45)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 99,
+  },
+  loadingBox: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    paddingVertical: 28,
+    paddingHorizontal: 40,
+    alignItems: "center",
+    gap: 14,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+  },
+  loadingText: {
+    color: "#4E3182",
+    fontSize: 15,
+    fontWeight: "600",
   },
 });
