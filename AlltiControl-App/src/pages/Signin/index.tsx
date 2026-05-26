@@ -12,27 +12,54 @@ import {
 
 import { AuthContext } from "../../contexts/AuthContext";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Signin() {
   const { signIn, loadingAuth } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "", general: "" });
+
+  function clearFieldError(field: keyof typeof errors) {
+    setErrors((prev) => ({ ...prev, [field]: "", general: "" }));
+  }
 
   async function handleLogin() {
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedPassword = password.trim();
 
-    if (!normalizedEmail || !trimmedPassword) {
-      setMessage("Preencha todos os campos.");
-      setTimeout(() => setMessage(""), 1600);
+    const newErrors = { email: "", password: "", general: "" };
+    let hasError = false;
+
+    if (!normalizedEmail) {
+      newErrors.email = "E-mail é obrigatório.";
+      hasError = true;
+    } else if (!EMAIL_REGEX.test(normalizedEmail)) {
+      newErrors.email = "Informe um e-mail válido.";
+      hasError = true;
+    }
+
+    if (!trimmedPassword) {
+      newErrors.password = "Senha é obrigatória.";
+      hasError = true;
+    } else if (trimmedPassword.length < 6) {
+      newErrors.password = "A senha deve ter no mínimo 6 caracteres.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
       return;
     }
 
+    setErrors({ email: "", password: "", general: "" });
+
     try {
       await signIn({ email: normalizedEmail, password: trimmedPassword });
-    } catch (err) {
-      console.log("Erro no login:", err);
-      setMessage("Erro ao fazer login");
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.message || "Credenciais inválidas. Tente novamente.";
+      setErrors({ email: "", password: "", general: msg });
     }
   }
 
@@ -43,33 +70,37 @@ export default function Signin() {
       <View style={styles.circleTop} />
       <View style={styles.circleBottom} />
       <View style={styles.card}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/Logo9.png")}
-        />
+        <Image style={styles.logo} source={require("../../assets/Logo9.png")} />
         <Text style={styles.title}>Faça seu Login</Text>
-        <TextInput
-          placeholder="Digite seu email"
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholderTextColor="#aaa"
-        />
 
-        <TextInput
-          placeholder="Digite sua senha"
-          style={styles.input}
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-          autoCapitalize="none"
-          placeholderTextColor="#aaa"
-        />
+        <View style={styles.fieldWrapper}>
+          <TextInput
+            placeholder="Digite seu email"
+            style={[styles.input, !!errors.email && styles.inputError]}
+            value={email}
+            onChangeText={(v) => { setEmail(v); clearFieldError("email"); }}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholderTextColor="#aaa"
+          />
+          {!!errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+        </View>
 
-        {message !== "" && <Text style={styles.message}>{message}</Text>}
+        <View style={styles.fieldWrapper}>
+          <TextInput
+            placeholder="Digite sua senha"
+            style={[styles.input, !!errors.password && styles.inputError]}
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(v) => { setPassword(v); clearFieldError("password"); }}
+            autoCapitalize="none"
+            placeholderTextColor="#aaa"
+          />
+          {!!errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+        </View>
+
+        {!!errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           {loadingAuth ? (
@@ -133,6 +164,10 @@ const styles = StyleSheet.create({
     color: "#444",
     marginBottom: 20,
   },
+  fieldWrapper: {
+    width: "100%",
+    marginBottom: 12,
+  },
   input: {
     width: "100%",
     height: 50,
@@ -140,8 +175,19 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 15,
     fontSize: 16,
-    marginBottom: 15,
     color: "#333",
+    borderWidth: 1.5,
+    borderColor: "transparent",
+  },
+  inputError: {
+    borderColor: "#E74C3C",
+  },
+  errorText: {
+    color: "#E74C3C",
+    fontSize: 12,
+    fontWeight: "500",
+    marginTop: 5,
+    marginLeft: 12,
   },
   button: {
     width: "60%",
@@ -157,10 +203,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     textTransform: "uppercase",
-  },
-  message: {
-    color: "#FF3F4B",
-    marginBottom: 10,
-    fontWeight: "bold",
   },
 });
