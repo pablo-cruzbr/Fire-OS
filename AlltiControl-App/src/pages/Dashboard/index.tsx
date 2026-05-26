@@ -702,7 +702,7 @@ const styles = StyleSheet.create({
   filterButton: {
     flexDirection: "row",
     alignItems: "center",
-    alignSelf: "flex-start",
+    alignSelf: "flex-end",
     marginHorizontal: 10,
     marginBottom: 8,
     paddingHorizontal: 14,
