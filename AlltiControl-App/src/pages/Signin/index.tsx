@@ -19,14 +19,17 @@ export default function Signin() {
   const [message, setMessage] = useState("");
 
   async function handleLogin() {
-    if (email === "" || password === "") {
+    const normalizedEmail = email.trim().toLowerCase();
+    const trimmedPassword = password.trim();
+
+    if (!normalizedEmail || !trimmedPassword) {
       setMessage("Preencha todos os campos.");
       setTimeout(() => setMessage(""), 1600);
       return;
     }
 
     try {
-      await signIn({ email, password });
+      await signIn({ email: normalizedEmail, password: trimmedPassword });
     } catch (err) {
       console.log("Erro no login:", err);
       setMessage("Erro ao fazer login");
@@ -37,7 +40,6 @@ export default function Signin() {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      
       <View style={styles.circleTop} />
       <View style={styles.circleBottom} />
       <View style={styles.card}>
@@ -51,6 +53,9 @@ export default function Signin() {
           style={styles.input}
           value={email}
           onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
           placeholderTextColor="#aaa"
         />
 
@@ -60,13 +65,12 @@ export default function Signin() {
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
+          autoCapitalize="none"
           placeholderTextColor="#aaa"
         />
 
-        
         {message !== "" && <Text style={styles.message}>{message}</Text>}
 
-        
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           {loadingAuth ? (
             <ActivityIndicator size={25} color={"#FFF"} />
@@ -82,11 +86,10 @@ export default function Signin() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4E3182", 
+    backgroundColor: "#4E3182",
     justifyContent: "center",
     alignItems: "center",
   },
-
   circleTop: {
     position: "absolute",
     width: 300,
@@ -105,15 +108,14 @@ const styles = StyleSheet.create({
     bottom: -120,
     left: -100,
   },
-
   card: {
     width: "90%",
     backgroundColor: "#fff",
     borderRadius: 25,
     padding: 25,
     alignItems: "center",
-    elevation: 6, 
-    shadowColor: "#000", 
+    elevation: 6,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
