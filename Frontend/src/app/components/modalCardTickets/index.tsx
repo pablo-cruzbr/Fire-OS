@@ -11,7 +11,7 @@ import { FaSignature } from "react-icons/fa";
 import { FaComputer } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { useGlobalModal } from "@/provider/GlobalModalProvider";
-import { OrdemdeServicoProps } from "@/lib/getlocalOS.type";
+import { OrdemdeServicoProps } from "@/lib/getOrdemdeServico.type";
 import { UsuariosProps } from '@/lib/getUsuario.type';
 import EditCardOrdemdeServico from "./EditCardOrdemdeServico";
 import ViewCardFoto from "./ViewCardFoto";
