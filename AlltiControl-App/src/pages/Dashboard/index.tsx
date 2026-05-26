@@ -390,6 +390,19 @@ console.log("DADOS COMPLETOS:", JSON.stringify(response.data.controles, null, 2)
   );
 }}
         contentContainerStyle={{ paddingBottom: 90, paddingTop: 10 }}
+        ListEmptyComponent={
+          !loading ? (
+            <View style={styles.emptyContainer}>
+              <Ionicons name="document-text-outline" size={52} color="#ccc" />
+              <Text style={styles.emptyTitle}>Nenhuma OS encontrada</Text>
+              <Text style={styles.emptySubtitle}>
+                {search || statusFilter || activeFiltersCount > 0
+                  ? "Tente ajustar os filtros aplicados."
+                  : "Não há ordens de serviço para exibir."}
+              </Text>
+            </View>
+          ) : null
+        }
       />
 
      
@@ -406,11 +419,11 @@ console.log("DADOS COMPLETOS:", JSON.stringify(response.data.controles, null, 2)
       </Modal>
 
      
-      <TouchableOpacity style={styles.fabSecondary} onPress={signOut}>
+      <TouchableOpacity style={styles.fabLogout} onPress={signOut}>
         <Feather name="log-in" size={28} color="#fff" />
       </TouchableOpacity>
 
-       <TouchableOpacity
+      <TouchableOpacity
         style={styles.fabSecondary}
         onPress={() => navigation.navigate("ListOrdemdeServicoInterna" as never)}
         activeOpacity={0.7}
@@ -651,6 +664,37 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     elevation: 4,
+  },
+  fabLogout: {
+    position: "absolute",
+    bottom: 115,
+    right: 20,
+    backgroundColor: "#4E3182",
+    width: 55,
+    height: 55,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 4,
+  },
+
+  emptyContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 80,
+    gap: 10,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#aaa",
+  },
+  emptySubtitle: {
+    fontSize: 13,
+    color: "#bbb",
+    textAlign: "center",
+    paddingHorizontal: 40,
   },
 
   // Botão de filtro
