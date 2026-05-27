@@ -29,6 +29,12 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
   const [pending, setPending] = useState<PendingReschedule | null>(null);
   const [saving, setSaving] = useState(false);
   const [schedulerReady, setSchedulerReady] = useState(false);
+  const [morePopup, setMorePopup] = useState<{
+    date: Date;
+    events: any[];
+    top: number;
+    left: number;
+  } | null>(null);
 
   const pendingRef = useRef<PendingReschedule | null>(null);
 
@@ -143,11 +149,61 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
       scheduler.config.drag_resize = false; // desativa resize, só move
       scheduler.config.drag_move = true;
       scheduler.config.header = ["day", "week", "month", "date", "prev", "today", "next"];
+      scheduler.config.max_month_events = 4;
+
+      // v7: signature is (date, hiddenCount) — not a config object
+      scheduler.templates.month_events_link = (_date: any, count: number) => {
+        return `<a class="dhx_cal_more_link" style="cursor:pointer;color:#4E3182;font-size:11px;font-weight:600;display:block;padding:1px 4px;">mais +${count}</a>`;
+      };
 
       if (containerRef.current) {
         scheduler.init(containerRef.current, new Date(), "month");
         isInitialized.current = true;
         setSchedulerReady(true);
+
+        containerRef.current.addEventListener(
+          "click",
+          (e: MouseEvent) => {
+            // catch both: my override class and DHTMLX's default class
+            const link = (e.target as HTMLElement).closest(
+              ".dhx_cal_more_link, .dhx_more_events"
+            ) as HTMLElement | null;
+            if (!link) return;
+            e.stopPropagation();
+            e.preventDefault();
+
+            // Walk up ancestors until we find a container with .dhx_month_head (day number)
+            let dayNum = 0;
+            let el: HTMLElement | null = link.parentElement;
+            while (el && el !== containerRef.current) {
+              const head = el.querySelector(".dhx_month_head");
+              if (head) {
+                const n = parseInt(head.textContent?.trim() ?? "", 10);
+                if (n > 0 && n <= 31) { dayNum = n; break; }
+              }
+              el = el.parentElement;
+            }
+            if (!dayNum) return;
+
+            const state = scheduler.getState();
+            const viewDate: Date = state.date;
+            const cellDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), dayNum);
+
+            const start = new Date(cellDate); start.setHours(0, 0, 0, 0);
+            const end = new Date(cellDate); end.setHours(23, 59, 59, 999);
+            const evs: any[] = scheduler.getEvents(start, end);
+            evs.sort((a: any, b: any) => +a.start_date - +b.start_date);
+
+            const rect = link.getBoundingClientRect();
+            const POPUP_H = 360;
+            let top = rect.bottom + 6;
+            if (top + POPUP_H > window.innerHeight - 8) top = rect.top - POPUP_H - 6;
+            let left = rect.left;
+            if (left + 320 > window.innerWidth - 8) left = window.innerWidth - 328;
+            setMorePopup({ date: cellDate, events: evs, top, left });
+          },
+          true
+        );
       }
 
       scheduler.attachEvent("onClick", (id: string) => {
@@ -223,6 +279,9 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
   const formatDate = (d: Date) =>
     new Intl.DateTimeFormat("pt-BR", { dateStyle: "long" }).format(new Date(d));
 
+  const formatTime = (d: Date) =>
+    new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(new Date(d));
+
   return (
     <div style={{ width: "100%", marginTop: "20px" }}>
 
@@ -265,6 +324,39 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
             </div>
           </div>
         </div>
+      )}
+
+      {morePopup && (
+        <>
+          <div className={styles.moreBackdrop} onClick={() => setMorePopup(null)} />
+          <div
+            className={styles.morePopup}
+            style={{ top: morePopup.top, left: morePopup.left }}
+          >
+            <div className={styles.morePopupHeader}>
+              <span>{formatDate(morePopup.date)}</span>
+              <button className={styles.morePopupClose} onClick={() => setMorePopup(null)}>✕</button>
+            </div>
+            <div className={styles.morePopupList}>
+              {morePopup.events.map((ev: any) => (
+                <div
+                  key={ev.id}
+                  className={styles.morePopupItem}
+                  onClick={() => {
+                    if (ev.rawTicket) openModal("OrdemdeServico", [ev.rawTicket]);
+                    setMorePopup(null);
+                  }}
+                >
+                  <span className={styles.morePopupDot} style={{ background: ev.color }} />
+                  <span className={styles.morePopupTime}>{formatTime(ev.start_date)}</span>
+                  <span className={styles.morePopupText}>
+                    {ev.text}{ev.rawTicket?.tecnico?.name ? ` – ${ev.rawTicket.tecnico.name}` : ""}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
       )}
 
       <div
