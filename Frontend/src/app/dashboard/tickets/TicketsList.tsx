@@ -336,7 +336,7 @@ return value
             placeholder="Todas as Tarefas"
             isClearable
             styles={reportSelectStyles}
-            menuPortal={typeof window !== 'undefined' ? document.body : undefined}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
             noOptionsMessage={() => 'Nenhuma tarefa encontrada'}
           />
         </div>
@@ -349,7 +349,7 @@ return value
             placeholder="Todas as Instituições"
             isClearable
             styles={reportSelectStyles}
-            menuPortal={typeof window !== 'undefined' ? document.body : undefined}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
             noOptionsMessage={() => 'Nenhuma instituição encontrada'}
           />
         </div>
@@ -362,7 +362,7 @@ return value
             placeholder="Todos os Clientes"
             isClearable
             styles={reportSelectStyles}
-            menuPortal={typeof window !== 'undefined' ? document.body : undefined}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
             noOptionsMessage={() => 'Nenhum cliente encontrado'}
           />
         </div>
@@ -375,7 +375,7 @@ return value
             placeholder="Todos os Status"
             isClearable
             styles={reportSelectStyles}
-            menuPortal={typeof window !== 'undefined' ? document.body : undefined}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
             noOptionsMessage={() => 'Nenhum status encontrado'}
           />
         </div>
@@ -388,7 +388,7 @@ return value
             placeholder="Todos os Tipos"
             isClearable
             styles={reportSelectStyles}
-            menuPortal={typeof window !== 'undefined' ? document.body : undefined}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
             noOptionsMessage={() => 'Nenhum tipo encontrado'}
           />
         </div>
