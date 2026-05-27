@@ -67,6 +67,7 @@ export default function TicketsList({ ticketsData }: Props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isExporting, setIsExporting] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   const { total = 0, totalPausada = 0, totalAberta = 0, totalEmDeslocamento = 0, totalEmAndamento = 0, totalConcluida = 0, totalOrdemdeServico = 0, totalTicket = 0, controles = [] } = ticketsData || {};
 
@@ -232,12 +233,16 @@ return value
               title="Sincronizar dados"
             />
             <div className={styles.actionsBar}>
+              <button className={styles.btnReport} onClick={() => setIsReportOpen(true)} title="Gerar Relatório">
+                <RiFileExcel2Line size={18} />
+                Relatório
+              </button>
               <button className={styles.btnSecondary} onClick={handleAddCardOrdemdeServico}>
                 Nova OS
-              </button> 
+              </button>
               <button className={styles.btnPrimary} onClick={handleAddCardTicket}>
                 Novo Ticket
-              </button> 
+              </button>
             </div>
           </div>
           <div className={styles.searchBox}>
@@ -252,63 +257,92 @@ return value
         </div>
       </header>
 
-<div className={styles.headerClient}>
-  <div className={styles.actions}>
-    <h1 className={styles.exportTitle}>GERAR RELATÓRIO DE OS</h1>
-
-<input 
-  type="text" 
-  placeholder="Início (dd/mm/aaaa)"
-  value={startDate} 
-  maxLength={10}
-  onChange={(e) => setStartDate(formatDisplayDate(e.target.value))} 
-  className={styles.select}
-/>
-
-<input 
-  type="text" 
-  placeholder="Fim (dd/mm/aaaa)"
-  value={endDate} 
-  maxLength={10}
-  onChange={(e) => setEndDate(formatDisplayDate(e.target.value))} 
-  className={styles.select}
-/>
-
-    <select 
-      value={selectedTarefa[0] || ""} 
-      onChange={(e) => setSelectedTarefa(e.target.value ? [e.target.value] : [])} 
-      className={styles.select}
-    >
-      <option value="">Todas as Tarefas</option>
-      {tarefa.map((t) => (
-        <option key={t.id} value={t.id}>{t.name}</option>
-      ))}
-    </select>
-
-    <select value={selectedInstituicao} onChange={(e) => setSelectedInstituicao(e.target.value)} className={styles.select}>
-      <option value="">Todas Instituições</option>
-      {instituicoes.map(inst => (
-        <option key={inst.id} value={inst.id}>{inst.name}</option>
-      ))}
-    </select>
-
-    <select value={selectedCliente} onChange={(e) => setSelectedCliente(e.target.value)} className={styles.select}>
-      <option value="">Todos Clientes</option>
-      {clientes.map(cli => (
-        <option key={cli.id} value={cli.id}>{cli.name}</option>
-      ))}
-    </select>
-
-    <button   
-      onClick={handleExportClick} 
-      disabled={isExporting}
-      className={`${styles.btnPrimary} ${isExporting ? styles.disabled : ''}`}
-    >
-      <RiFileExcel2Line size={20}/>
-      {isExporting ? 'Processando...' : 'Exportar Excel'}
-    </button>
+{isReportOpen && (
+  <div className={styles.reportOverlay} onClick={() => setIsReportOpen(false)}>
+    <div className={styles.reportModal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.reportModalHeader}>
+        <h2 className={styles.reportModalTitle}>Gerar Relatório de OS</h2>
+        <button className={styles.reportModalClose} onClick={() => setIsReportOpen(false)}>✕</button>
+      </div>
+      <div className={styles.reportModalBody}>
+        <div className={styles.reportRow}>
+          <label className={styles.reportLabel}>Período</label>
+          <div className={styles.reportDateGroup}>
+            <input
+              type="text"
+              placeholder="Início (dd/mm/aaaa)"
+              value={startDate}
+              maxLength={10}
+              onChange={(e) => setStartDate(formatDisplayDate(e.target.value))}
+              className={styles.reportInput}
+            />
+            <span className={styles.reportDateSep}>até</span>
+            <input
+              type="text"
+              placeholder="Fim (dd/mm/aaaa)"
+              value={endDate}
+              maxLength={10}
+              onChange={(e) => setEndDate(formatDisplayDate(e.target.value))}
+              className={styles.reportInput}
+            />
+          </div>
+        </div>
+        <div className={styles.reportRow}>
+          <label className={styles.reportLabel}>Tarefa</label>
+          <select
+            value={selectedTarefa[0] || ""}
+            onChange={(e) => setSelectedTarefa(e.target.value ? [e.target.value] : [])}
+            className={styles.reportSelect}
+          >
+            <option value="">Todas as Tarefas</option>
+            {tarefa.map((t) => (
+              <option key={t.id} value={t.id}>{t.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.reportRow}>
+          <label className={styles.reportLabel}>Instituição</label>
+          <select
+            value={selectedInstituicao}
+            onChange={(e) => setSelectedInstituicao(e.target.value)}
+            className={styles.reportSelect}
+          >
+            <option value="">Todas Instituições</option>
+            {instituicoes.map(inst => (
+              <option key={inst.id} value={inst.id}>{inst.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.reportRow}>
+          <label className={styles.reportLabel}>Cliente</label>
+          <select
+            value={selectedCliente}
+            onChange={(e) => setSelectedCliente(e.target.value)}
+            className={styles.reportSelect}
+          >
+            <option value="">Todos Clientes</option>
+            {clientes.map(cli => (
+              <option key={cli.id} value={cli.id}>{cli.name}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className={styles.reportModalFooter}>
+        <button className={styles.reportBtnCancel} onClick={() => setIsReportOpen(false)}>
+          Cancelar
+        </button>
+        <button
+          onClick={handleExportClick}
+          disabled={isExporting}
+          className={`${styles.reportBtnExport} ${isExporting ? styles.disabled : ''}`}
+        >
+          <RiFileExcel2Line size={18} />
+          {isExporting ? 'Processando...' : 'Exportar Excel'}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+)}
 
       <div className={styles.headerClient}>
         <div className={styles.actions}>
