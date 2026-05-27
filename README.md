@@ -1,235 +1,265 @@
-# AlltiControl | Gerencie Ordens de Serviço, controle patrimônios e ofereça mobilidade total para seus técnicos
-## "Engenharia focada na eficiência: Eliminando a burocracia na gestão de Serviços de Informática."
+# AlltiControl — Service Order Management SaaS
+
+### *"Engenharia focada na eficiência: Eliminando a burocracia na gestão de Serviços de Informática."*
 
 <p align="center">
-  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white" /></a>
-  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" /></a>
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" /></a>
+  <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" /></a>
+  <a href="https://reactnative.dev/"><img src="https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=black" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" /></a>
   <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" /></a>
   <a href="https://www.postgresql.org/"><img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" /></a>
-  <a href="https://reactnative.dev/"><img src="https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=white" /></a>
+  <a href="https://www.prisma.io/"><img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" /></a>
+  <a href="https://expo.dev/"><img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" /></a>
 </p>
 
-## 🎯 Do Caos à Performance: AlltiControl
-<img width="1280" height="800" alt="download (3)" src="https://github.com/user-attachments/assets/d31a0cc7-cdcb-45d1-ba0e-5f8f706cc603" />
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Em_Produção-4E3182?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Usuários-68+-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Instituições-130+-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" />
+</p>
 
 ---
 
-
-Diferente de projetos acadêmicos, o **AlltiControl** nasceu da necessidade real de campo. Identifiquei que a equipe técnica perdia tempo precioso lutando contra softwares legados fragmentados, onde um simples atendimento exigia a navegação por até 6 telas distintas.
-
-**Minha missão foi clara:** Projetar e codificar uma solução que removesse o atrito operacional, permitindo que técnicos foquem na resolução de problemas e gestores na inteligência de dados.
-
-### 📈 Impacto e Escala
-* **68 Usuários** cadastrados na Plataforma.
-* **130+ Instituições Públicas** (Postos de Saúde e Escolas Municipais).
-* **100% da Infraestrutura Crítica** da prefeitura sob gestão do software.
-* **Redução Drástica de Fricção:** Otimização de fluxo de 6 telas para apenas **2 telas principais**.
+<img width="1280" height="800" alt="AlltiControl Dashboard" src="https://github.com/user-attachments/assets/d31a0cc7-cdcb-45d1-ba0e-5f8f706cc603" />
 
 ---
 
-## 🚀 Visão Geral do Ecossistema
+## 🎯 O Problema Real
 
-O AlltiControl é um **SaaS Full Stack em produção**, operando como uma solução "Single Source of Truth" (Fonte Única de Verdade) para empresas que prestam serviços de TI em larga escala.
+Equipes de TI em prefeituras perdiam horas por dia navegando por **5 a 6 telas diferentes** para registrar uma única ordem de serviço em sistemas legados. Técnicos de campo gastavam mais tempo no software do que no hardware.
 
-### 📊 KPI Dashboard (Key Performance Indicators)
+**O AlltiControl resolve isso** — gestão completa de ordens de serviço em **2 telas**, com app mobile para o técnico em campo e painel estratégico para o gestor.
 
-| Métrica de Eficiência | Sistemas Legados | AlltiControl | Impacto |
+---
+
+## 📈 Impacto em Produção
+
+| Métrica | Antes (Sistema Legado) | Depois (AlltiControl) | Ganho |
 |---|---|---|---|
-| **Fluxo de Trabalho** | 5-6 telas por OS | **2 telas intuitivas** | **-66% de complexidade** |
-| **Etapas de Input** | 100% manual/fragmentado | **Fluxo Otimizado** | **-83% de esforço manual** |
-| **Escalabilidade** | Limitada/Local | **Cloud-Ready (130+ Unidades)** | **Pronto para expansão** |
-| **Tempo de Resposta** | Lento/Burocrático | **Mobile-First Real-time** | **Alta Agilidade** |
+| Telas por OS | 5–6 telas | **2 telas** | **−66% complexidade** |
+| Esforço de input | 100% manual/fragmentado | Fluxo otimizado | **−83% esforço** |
+| Escala | Local/limitada | Cloud-ready | **130+ unidades** |
+| Mobilidade | Zero | App nativo iOS/Android | **100% field-ready** |
 
-## 🚨 O Problema de Negócio (The "Pain Point")
-Sistemas anteriores (ex: ALVO) focavam na burocracia documental, ignorando a experiência do usuário (UX) do técnico de campo. Isso resultava em:
-1. **Latência Operacional:** Atraso no registro de informações críticas.
-2. **Dados Sujos:** Informações perdidas devido à complexidade do sistema.
-3. **Custo de Oportunidade:** Técnicos gastavam mais tempo no software do que no hardware.
-
-## ✅ A Solução de Engenharia
-Desenvolvi uma arquitetura moderna unificada que entrega:
-* **Mobile-First para Técnicos:** Agilidade máxima onde o serviço acontece.
-* **Painel Estratégico Web:** Visibilidade total para gestores com dashboards de BI (Business Intelligence).
-* **Centralização de Ativos:** Gestão integrada de inventário, laudos e histórico de manutenção.
+- **68 usuários** cadastrados na plataforma  
+- **130+ instituições públicas** (postos de saúde e escolas municipais)  
+- **100% da infraestrutura crítica** de TI de Mogi das Cruzes/SP sob gestão do sistema  
 
 ---
 
-## 🏗️ Contexto
+## 🏗️ Arquitetura do Sistema
 
+O AlltiControl opera como um **monorepo com 3 camadas integradas**:
 
+```mermaid
+graph TB
+  subgraph Web["🌐 Web Dashboard — Next.js 14 (App Router)"]
+    FE["Painel Administrativo<br/>SSR + Client Components + SCSS Modules"]
+  end
 
-Desenvolvido paralelamente à atuação como técnico de helpdesk N2, o projeto foi validado com técnicos de campo em cada feature, apresentado à gestão com protótipo funcional de 3 módulos-chave e aprovado para produção — resultando em promoção a Desenvolvedor Fullstack.
+  subgraph Mobile["📱 App Mobile — React Native + Expo"]
+    APP["Interface do Técnico<br/>Timer · Geolocalização · Assinatura Digital"]
+  end
 
+  subgraph Backend["⚙️ Backend — Node.js + Express"]
+    API["REST API<br/>JWT Auth · bcrypt"]
+    DB[("PostgreSQL<br/>Prisma ORM")]
+  end
 
+  subgraph External["☁️ Serviços Externos"]
+    CDN["Cloudinary<br/>(Upload de Imagens)"]
+    MAPS["Google Maps / Waze<br/>(Navegação do Técnico)"]
+  end
 
-Atualmente em implantação em prefeituras, escolas e postos de saúde.
-
-
-
-Ele foi projetado para **facilitar a rotina operacional**, organizar atendimentos e melhorar a comunicação entre técnicos e clientes.  
-
-<img width="1280" height="800" alt="Carrossel portifolio" src="https://github.com/user-attachments/assets/cee8fcad-7cb3-4bbf-af7f-5f40c1ed6085" />
----
-
-<img width="1280" height="800" alt="Carrossel portifolio (1)" src="https://github.com/user-attachments/assets/5fc40857-de01-46da-9d39-d54180b8ff43" />
-
----
-
-
-
-Principais funcionalidades:  
-
-- **Controle de Tempo de Atividade:** Registro automático de Início, Pausa, Retorno e Término de OS com cálculo de duração real.
-
-- **Relatórios Personalizados:** Filtros avançados por data, tipo de tarefa, cliente e instituição.
-
-- **Exportação de Dados:** Geração de relatórios de Ordens de Serviço em formato Excel (.xlsx).
-
-- Registro completo de OS e tickets internos.
-
-- Cadastro de Novos usuários e Técnicos.
-
-- Cadastro de Empresas e Instituições Unidade com endereço e cnpj.
-
-- Agenda técnica integrada (diária, semanal, mensal).
-
-- Aplicativo mobile para técnicos em **React Native**.
-
-- Integração com **Google Maps** e **Waze**.
-
-- Assinatura digital de ordens concluídas.
-
-- Gestão de clientes, unidades e endereços.
-
-- Cadastro e controle de máquinas por patrimônio, Assistência Técnica, Laudo Técnico e status (Laboratório, Pendentes, etc).
-
-- Painel administrativo moderno em **Next.js e Sass Modular**.
-
-- Backend seguro com **Node.js**, **Express**, **PostgreSQL** e **Prisma**.
-
-- Autenticação JWT e criptografia com biblioteca bcrypt.
-
-
+  FE  -->|"HTTPS / JSON"| API
+  APP -->|"HTTPS / JSON"| API
+  API --> DB
+  APP -->|"Multipart Upload"| CDN
+  APP -->|"Deep Link"| MAPS
+```
 
 ---
 
+## 📁 Estrutura do Projeto
 
-
-## 📌 Funcionalidades
-
-
-
-### 💻 Web App
-
-- **Geração de Relatórios:** Dashboard com filtros dinâmicos e exportação de dados.
-
-- **UI/UX Aprimorada:** Inputs de data com máscaras (dd/mm/aaaa) e componentes de seleção customizados.
-
-- Dashboard de OS abertas, em andamento e concluídas.
-
-- Agenda/Calendário Técnico.
-
-- Gestão de clientes e unidades (privadas, públicas, escolas, empresas).
-
-- Cadastro de máquinas e controle de manutenção.
-
-- Documentação técnica com assinatura digital.
-
-- Cadastro de técnicos e controle de acessos.
-
-- Login seguro com JWT (salva os tokens nos cookies do navegador).
-
-
-
-### 📱 Mobile App
-
-- **Filtro de Atribuição:** O técnico visualiza apenas as ordens de serviço atribuídas a ele (Segurança de Dados).
-
-- **Timer de OS:** Botões dinâmicos para controle de tempo de execução da atividade.
-
-- Geolocalização para rotas (Waze e Google Maps).
-
-- Formulário de atendimento completo.
-
-- Upload e envio de imagens (expo-image-picker + Cloudinary).
-
-- Assinatura Digital (react-native-signature-canvas).
-
-- Conclusão de Ordens de Serviço.
-
-  
-
----
-
-
-
-## 🛠 Tecnologias Utilizadas
-
-
-
-| Frontend Web | Backend | Mobile App |
-
-|--------------|---------|------------|
-
-| Next.js | Node.js | React Native |
-
-| React.js | Express | Expo |
-
-| TypeScript | PostgreSQL | Context API + AsyncStorage |
-
-| SCSS Modular | Prisma | Axios |
-
-
-
-**Outras Bibliotecas:** ExcelJS/SheetJS, React-Select, Axios, JWT, Bcrypt, componentes customizados e responsivos.
-
-
+```
+allti-control/                        # Monorepo
+│
+├── Frontend/                         # Next.js 14 — Painel Administrativo Web
+│   └── src/
+│       ├── app/
+│       │   ├── dashboard/            # Rotas protegidas do painel
+│       │   │   ├── tickets/          # Lista de OS + filtros + relatório Excel
+│       │   │   ├── ticketscount/     # Calendário técnico (DHTMLX Scheduler)
+│       │   │   ├── controles/        # Assistência técnica, laboratório, laudos
+│       │   │   ├── compras/          # Solicitações de compra
+│       │   │   ├── usuarios/         # Gestão de usuários e técnicos
+│       │   │   └── formulariosadd/   # Criação de OS e tickets
+│       │   ├── components/           # Modais, cards, calendar, sidebar
+│       │   └── AreadeUsuario/        # Portal do técnico (formulário de ticket)
+│       ├── lib/                      # Tipagens TypeScript, helpers, exportação Excel
+│       ├── provider/                 # Context providers (GlobalModal, Compras)
+│       └── services/                 # Instância Axios configurada
+│
+├── Backend/                          # Node.js + Express — API REST
+│   ├── prisma/
+│   │   ├── schema.prisma             # Modelo de dados completo
+│   │   └── migrations/               # Histórico de migrações do banco
+│   └── src/
+│       ├── controllers/
+│       │   ├── controles_forms/      # CRUD de OS, compras, lab, laudos...
+│       │   ├── status_categorias/    # Listas de status, tipos, clientes...
+│       │   └── user/                 # Auth e gestão de usuários
+│       ├── services/                 # Regras de negócio (List, Create, Update...)
+│       ├── Middleware/               # Autenticação JWT
+│       └── routes.ts                 # Registro centralizado de todas as rotas
+│
+└── AlltiControl-App/                 # React Native + Expo — App do Técnico
+    └── src/
+        ├── pages/
+        │   ├── Dashboard/            # Lista de OS atribuídas ao técnico
+        │   ├── Signin/               # Autenticação com validação de campos
+        │   └── ListOrdemdeServicoInterna/
+        ├── components/               # Modais de OS, formulários de atendimento
+        ├── contexts/                 # Estado global (auth, OS ativa)
+        └── services/                 # Chamadas à API com Axios
+```
 
 ---
 
+## ✨ Funcionalidades
 
+### 💻 Web Dashboard (Next.js)
+- Dashboard de OS com status: Aberta, Em Deslocamento, Em Andamento, Pausada, Concluída
+- Calendário técnico com drag-and-drop para reagendamento (DHTMLX Scheduler)
+- Popup de overflow de eventos por dia (estilo Google Calendar)
+- Relatório de OS em Excel (.xlsx) com filtros por período, tarefa, status, tipo, cliente e instituição
+- Gestão de clientes, unidades, técnicos e usuários
+- Controle de patrimônio: assistência técnica, laboratório, laudos, estabilizadores
+- Documentação técnica com assinatura digital
+- Autenticação JWT com tokens em cookies HttpOnly
 
-## 💡 Motivação
+### 📱 Mobile App (React Native + Expo)
+- Filtro automático por técnico atribuído (segurança de dados)
+- Timer de OS: Iniciar → Pausar → Retomar → Concluir com cálculo de duração real
+- Geolocalização com deep link para Waze e Google Maps
+- Upload de fotos via `expo-image-picker` + Cloudinary (com prevenção de duplicatas)
+- Assinatura digital integrada (`react-native-signature-canvas`)
+- Loading overlay e validação de campos no login
+- Atualização ao vivo do modal após edição
 
-
-
-O AlltiControl foi construído para devolver tempo à operação. Em vez de lutar com softwares burocráticos, o técnico foca no problema e o gestor foca na estratégia, tudo através de uma interface moderna e segura.
-
-
-
----
-
-## Problemas Conhecidos e Soluções (Concluído e Resolvido !)
-
-- **Cálculo de Tempo:** Corrigido bug crítico no cálculo preciso do tempo das OS (Início, Pausa e Retomar). Solução aplicada via Renderização Condicional e lógica de backend.
-
-- **Máscara de Data:** Implementada lógica para garantir formato dd/mm/aaaa em todos os navegadores.
-
-
-
-## 🔜 Próximos Passos / Melhorias Futuras
-
-- Fazer Deploy na Vercel.
-
-- Criar Funcionalidade de Transformar áudio em texto para documentação técnica (Expo Speech).
-
-- Notificações push no app mobile.
-
-- Implementar validação com Zod nas rotas da API.
-
-
+### ⚙️ Backend (Node.js + Express)
+- API REST com mais de 80 endpoints documentados em `routes.ts`
+- Autenticação JWT com middleware de proteção por rota
+- Criptografia de senhas com bcrypt
+- ORM Prisma com PostgreSQL — migrações versionadas
+- Exportação de relatórios via ExcelJS com estilização de planilha
+- Cache-Control headers para garantir dados frescos (evita 304)
+- Suporte a upload multipart (imagens de OS)
 
 ---
 
+## 🛠 Stack Tecnológica
 
+| Camada | Tecnologias |
+|---|---|
+| **Frontend Web** | Next.js 14, React, TypeScript, SCSS Modules, react-select, ExcelJS |
+| **Mobile** | React Native, Expo, Context API, AsyncStorage, Axios |
+| **Backend** | Node.js, Express, TypeScript, JWT, bcrypt |
+| **Banco de Dados** | PostgreSQL, Prisma ORM |
+| **Armazenamento** | Cloudinary (imagens) |
+| **Calendário** | DHTMLX Scheduler v7 |
+| **Deploy Mobile** | Expo EAS Build + EAS Update |
 
-## 📁 Status do Projeto
+---
 
+## 🚀 Como Rodar Localmente
 
+### Pré-requisitos
+- Node.js 18+
+- PostgreSQL 14+
+- npm ou yarn
+- Expo CLI (`npm install -g expo-cli`)
 
-⚙️ **Fase de Implantação e Expansão:** O AlltiControl não é apenas um projeto de estudo; ele é a ferramenta central de operação em Mogi das Cruzes/SP. O software já provou sua estabilidade ao gerenciar o parque tecnológico de mais de 130 unidades de saúde e educação, além de clientes do setor privado. 
+### 1. Backend
 
+```bash
+cd Backend
+npm install
 
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o .env com suas credenciais do PostgreSQL e JWT_SECRET
 
-Atualmente, o foco está na coleta de feedbacks dos técnicos em campo para o refinamento de métricas de performance e inteligência de dados.
+# Rode as migrações do banco
+npx prisma migrate dev
+
+# Inicie o servidor
+npm run dev
+```
+
+### 2. Frontend Web
+
+```bash
+cd Frontend
+npm install
+
+# Configure as variáveis de ambiente
+cp .env.example .env.local
+# Edite com a URL do seu backend
+
+npm run dev
+# Acesse: http://localhost:3000
+```
+
+### 3. App Mobile
+
+```bash
+cd AlltiControl-App
+npm install
+
+# Configure a URL da API em src/services/api.ts
+# Inicie o Expo
+npx expo start
+```
+
+### Variáveis de Ambiente necessárias
+
+| Variável | Onde | Descrição |
+|---|---|---|
+| `DATABASE_URL` | Backend | String de conexão PostgreSQL |
+| `JWT_SECRET` | Backend | Chave secreta para tokens JWT |
+| `CLOUDINARY_URL` | Backend | Credenciais do Cloudinary |
+| `NEXT_PUBLIC_API_URL` | Frontend | URL base da API |
+
+---
+
+## 🏁 Contexto de Desenvolvimento
+
+Desenvolvido paralelamente à atuação como **técnico de helpdesk N2**, o projeto foi validado com técnicos de campo em cada feature, apresentado à gestão com protótipo funcional de 3 módulos-chave e aprovado para produção — resultando em **promoção a Desenvolvedor Fullstack antes de completar 1 ano na empresa**.
+
+Atualmente em implantação em prefeituras, escolas e postos de saúde em Mogi das Cruzes/SP.
+
+---
+
+## 🔜 Próximos Passos
+
+- [ ] Notificações push no app mobile (Expo Notifications)
+- [ ] Transcrição de áudio para documentação técnica (Expo Speech)
+- [ ] Validação de schema com Zod nas rotas da API
+- [ ] Testes automatizados com Jest (backend) e Playwright (web)
+- [ ] Deploy do frontend na Vercel
+
+---
+
+## 📄 Licença
+
+MIT © [Pablo Cruz](https://github.com/pablo-cruzbr)
+
+---
+
+<p align="center">
+  <strong>GO GLOBAL OR NOTHING</strong>
+</p>
