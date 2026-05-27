@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './ticketsLit.module.scss';
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -69,6 +69,23 @@ export default function TicketsList({ ticketsData }: Props) {
   const [isExporting, setIsExporting] = useState(false);
 
   const { total = 0, totalPausada = 0, totalAberta = 0, totalEmDeslocamento = 0, totalEmAndamento = 0, totalConcluida = 0, totalOrdemdeServico = 0, totalTicket = 0, controles = [] } = ticketsData || {};
+
+  // Auto-refresh: modal close, window focus, and 60s polling
+  const prevIsOpen = useRef(isOpen);
+  useEffect(() => {
+    if (prevIsOpen.current && !isOpen) router.refresh();
+    prevIsOpen.current = isOpen;
+  }, [isOpen, router]);
+
+  useEffect(() => {
+    const silentRefresh = () => router.refresh();
+    window.addEventListener("focus", silentRefresh);
+    const interval = setInterval(silentRefresh, 60_000);
+    return () => {
+      window.removeEventListener("focus", silentRefresh);
+      clearInterval(interval);
+    };
+  }, [router]);
 
   useEffect(() => {
     const fetchFilters = async () => {
