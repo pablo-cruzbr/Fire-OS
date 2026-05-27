@@ -96,7 +96,6 @@ export function ModalOrdemdeServico({ data }: ModalOrdemdeServicoProps) {
           />
         )}
 
-        {/* Se estiver em modo Edição */}
         {isEditing && (
           <EditCardOrdemdeServico
             ordemdeServico={localOS}
@@ -105,7 +104,6 @@ export function ModalOrdemdeServico({ data }: ModalOrdemdeServicoProps) {
           />
         )}
 
-        {/* Se estiver em modo Detalhe Técnico */}
         {isDetailTecnico && (
           <DetailTecnico
             ordemdeServico={localOS}
@@ -113,10 +111,8 @@ export function ModalOrdemdeServico({ data }: ModalOrdemdeServicoProps) {
           />
         )}
 
-        {/* Conteúdo padrão */}
         {!isFotos && !isEditing && !isDetailTecnico && !isAssinatura && (
           <>
-            {/* DADOS DO USUÁRIO */}
             <p className={styles.sectionTitle}>Dados do Usuário</p>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
@@ -179,7 +175,6 @@ export function ModalOrdemdeServico({ data }: ModalOrdemdeServicoProps) {
               )}
             </div>
 
-            {/* DADOS DA SOLICITAÇÃO */}
             <p className={styles.sectionTitle}>Dados da Solicitação</p>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
