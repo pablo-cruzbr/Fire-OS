@@ -28,9 +28,9 @@
 
 ## 🎯 O Problema Real
 
-Equipes de TI em prefeituras perdiam horas por dia navegando por **5 a 6 telas diferentes** para registrar uma única ordem de serviço em sistemas legados. Técnicos de campo gastavam mais tempo no software do que no hardware.
+A [**Alltiservice**](https://alltiservice.com.br) é uma empresa de TI terceirizada com 22+ anos de mercado, prestando serviços para prefeituras, escolas e postos de saúde em Mogi das Cruzes/SP. Seus técnicos de campo perdiam horas por dia navegando por **5 a 6 telas diferentes** em sistemas legados para registrar uma única ordem de serviço — gastando mais tempo no software do que no hardware.
 
-**O AlltiControl resolve isso** — gestão completa de ordens de serviço em **2 telas**, com app mobile para o técnico em campo e painel estratégico para o gestor.
+**O AlltiControl resolve isso** — construí o sistema internamente para a própria Alltiservice: gestão completa das ordens de serviço em **2 telas**, com app mobile para o técnico em campo e painel estratégico para o gestor. Atualmente em fase de implantação e testes dentro da empresa.
 
 ---
 
@@ -43,9 +43,9 @@ Equipes de TI em prefeituras perdiam horas por dia navegando por **5 a 6 telas d
 | Escala | Local/limitada | Cloud-ready | **130+ unidades** |
 | Mobilidade | Zero | App nativo iOS/Android | **100% field-ready** |
 
-- **68 usuários** cadastrados na plataforma  
-- **130+ instituições públicas** (postos de saúde e escolas municipais)  
-- **100% da infraestrutura crítica** de TI de Mogi das Cruzes/SP sob gestão do sistema  
+- **68 usuários** da Alltiservice cadastrados na plataforma  
+- **130+ instituições atendidas** pela Alltiservice (postos de saúde e escolas municipais)  
+- **100% das OSs** da equipe técnica da Alltiservice passando pelo sistema  
 
 ---
 
@@ -238,9 +238,9 @@ npx expo start
 
 ## 🏁 Contexto de Desenvolvimento
 
-Desenvolvido paralelamente à atuação como **técnico de helpdesk N2**, o projeto foi validado com técnicos de campo em cada feature, apresentado à gestão com protótipo funcional de 3 módulos-chave e aprovado para produção — resultando em **promoção a Desenvolvedor Fullstack antes de completar 1 ano na empresa**.
+Desenvolvido paralelamente à atuação como **técnico de helpdesk N2 na [Alltiservice](https://alltiservice.com.br)**, o projeto foi validado com os próprios técnicos de campo em cada feature, apresentado à gestão com protótipo funcional de 3 módulos-chave e aprovado para uso interno — resultando em **promoção a Desenvolvedor Fullstack antes de completar 1 ano na empresa**.
 
-Atualmente em implantação em prefeituras, escolas e postos de saúde em Mogi das Cruzes/SP.
+Atualmente em fase de implantação e testes dentro da Alltiservice, gerenciando as ordens de serviço das equipes que atendem prefeituras, escolas e postos de saúde em Mogi das Cruzes/SP.
 
 ---
 
