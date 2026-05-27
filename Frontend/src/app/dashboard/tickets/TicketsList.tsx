@@ -47,6 +47,37 @@ interface TipodeOrdemdeServico {
 
 type SelectOption = { value: string; label: string };
 
+const filterSelectStyles: StylesConfig<SelectOption, false> = {
+  container: (base) => ({ ...base, flex: 1, minWidth: 180 }),
+  control: (base, state) => ({
+    ...base,
+    borderColor: state.isFocused ? '#4E3182' : '#eef2f6',
+    borderWidth: '1.5px',
+    borderRadius: '8px',
+    boxShadow: state.isFocused ? '0 0 0 3px rgba(78,49,130,0.1)' : 'none',
+    backgroundColor: '#f8fafc',
+    minHeight: '42px',
+    fontSize: '0.85rem',
+    fontFamily: '"Poppins", sans-serif',
+    cursor: 'pointer',
+    '&:hover': { borderColor: '#4E3182' },
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? '#4E3182' : state.isFocused ? '#f4f0ff' : '#fff',
+    color: state.isSelected ? '#fff' : '#1e293b',
+    fontSize: '0.85rem',
+    fontFamily: '"Poppins", sans-serif',
+    cursor: 'pointer',
+  }),
+  placeholder: (base) => ({ ...base, color: '#4E3182', fontSize: '0.85rem', fontWeight: 500 }),
+  singleValue: (base) => ({ ...base, color: '#4E3182', fontSize: '0.85rem', fontWeight: 500 }),
+  clearIndicator: (base) => ({ ...base, color: '#94a3b8', '&:hover': { color: '#4E3182' } }),
+  dropdownIndicator: (base) => ({ ...base, color: '#4E3182' }),
+  menu: (base) => ({ ...base, borderRadius: '8px', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', zIndex: 9999 }),
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+};
+
 const reportSelectStyles: StylesConfig<SelectOption, false> = {
   control: (base, state) => ({
     ...base,
@@ -415,54 +446,60 @@ return value
 
            <h1 className={styles.exportTitle}>FILTRAR OS OU TICKET</h1>
 
-          <select 
-            value={selectedTarefa[0] || ""} 
-            onChange={(e) => setSelectedTarefa(e.target.value ? [e.target.value] : [])} 
-            className={styles.select}
-          >
-            <option value="">Todas as Tarefas</option>
-            {tarefa.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.name}
-              </option>
-            ))}
-          </select>
+          <Select<SelectOption>
+            options={tarefa.map(t => ({ value: t.id, label: t.name }))}
+            value={tarefa.find(t => t.id === selectedTarefa[0]) ? { value: selectedTarefa[0], label: tarefa.find(t => t.id === selectedTarefa[0])!.name } : null}
+            onChange={(opt) => setSelectedTarefa(opt ? [opt.value] : [])}
+            placeholder="Todas as Tarefas"
+            isClearable
+            styles={filterSelectStyles}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
+            noOptionsMessage={() => 'Nenhuma tarefa encontrada'}
+          />
 
-          <select value={selectedInstituicao} onChange={(e) => setSelectedInstituicao(e.target.value)} className={styles.select}>
-            <option value="">Todas Instituições</option>
-            {instituicoes.map(inst => (
-              <option key={inst.id} value={inst.id}>{inst.name}</option>
-            ))}
-          </select>
+          <Select<SelectOption>
+            options={instituicoes.map(i => ({ value: i.id, label: i.name }))}
+            value={instituicoes.find(i => i.id === selectedInstituicao) ? { value: selectedInstituicao, label: instituicoes.find(i => i.id === selectedInstituicao)!.name } : null}
+            onChange={(opt) => setSelectedInstituicao(opt?.value ?? '')}
+            placeholder="Todas as Instituições"
+            isClearable
+            styles={filterSelectStyles}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
+            noOptionsMessage={() => 'Nenhuma instituição encontrada'}
+          />
 
-          <select value={selectedCliente} onChange={(e) => setSelectedCliente(e.target.value)} className={styles.select}>
-            <option value="">Todos Clientes</option>
-            {clientes.map(cli => (
-              <option key={cli.id} value={cli.id}>{cli.name}</option>
-            ))}
-          </select>
+          <Select<SelectOption>
+            options={clientes.map(c => ({ value: c.id, label: c.name }))}
+            value={clientes.find(c => c.id === selectedCliente) ? { value: selectedCliente, label: clientes.find(c => c.id === selectedCliente)!.name } : null}
+            onChange={(opt) => setSelectedCliente(opt?.value ?? '')}
+            placeholder="Todos os Clientes"
+            isClearable
+            styles={filterSelectStyles}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
+            noOptionsMessage={() => 'Nenhum cliente encontrado'}
+          />
 
-          <select 
-              value={selectedPrioridade} 
-              onChange={(e) => setSelectedPrioridade(e.target.value)} 
-              className={styles.select}
-            >
-              <option value="">Prioridade</option>
-              {prioridade.map(prio => (
-                <option key={prio.id} value={prio.id}>{prio.name}</option>
-              ))}
-          </select>
+          <Select<SelectOption>
+            options={prioridade.map(p => ({ value: p.id, label: p.name }))}
+            value={prioridade.find(p => p.id === selectedPrioridade) ? { value: selectedPrioridade, label: prioridade.find(p => p.id === selectedPrioridade)!.name } : null}
+            onChange={(opt) => setSelectedPrioridade(opt?.value ?? '')}
+            placeholder="Prioridade"
+            isClearable
+            styles={filterSelectStyles}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
+            noOptionsMessage={() => 'Nenhuma prioridade encontrada'}
+          />
 
-          <select 
-              value={selectedTipoOrdem} 
-              onChange={(e) => setSelectedTipoOrdem(e.target.value)} 
-              className={styles.select}
-            >
-              <option value="">Tipo de Ordem de Serviço</option>
-              {tiposOrdem.map(tipo => (
-                <option key={tipo.id} value={tipo.id}>{tipo.name}</option>
-              ))}
-          </select>
+          <Select<SelectOption>
+            options={tiposOrdem.map(t => ({ value: t.id, label: t.name }))}
+            value={tiposOrdem.find(t => t.id === selectedTipoOrdem) ? { value: selectedTipoOrdem, label: tiposOrdem.find(t => t.id === selectedTipoOrdem)!.name } : null}
+            onChange={(opt) => setSelectedTipoOrdem(opt?.value ?? '')}
+            placeholder="Tipo de Ordem de Serviço"
+            isClearable
+            styles={filterSelectStyles}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
+            noOptionsMessage={() => 'Nenhum tipo encontrado'}
+          />
         </div> 
       </div>
       
@@ -474,8 +511,8 @@ return value
           { label: 'OS em Andamento', value: totalEmAndamento, status: 'EM ANDAMENTO' },
           { label: 'OS Concluída', value: totalConcluida, status: 'CONCLUIDA' },
           { label: 'OS PAUSADA', value: totalPausada, status: 'PAUSADA' },
-          { label: 'TICKET', value: totalTicket, status: 'TICKET' },
-          { label: 'ORDEM DE SERVICO', value: totalOrdemdeServico, status: 'ORDEM DE SERVICO' },
+          //{ label: 'TICKET', value: totalTicket, status: 'TICKET' },
+          //{ label: 'ORDEM DE SERVICO', value: totalOrdemdeServico, status: 'ORDEM DE SERVICO' },
         ].map((card) => (
           <div
             key={card.label}
