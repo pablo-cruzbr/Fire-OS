@@ -2,21 +2,25 @@ import prismaClient from "../../../prisma";
 
 interface ListRequest {
   user_id: string;
-  startDate?: string;    
-  endDate?: string;      
-  cliente_id?: string;   
-  instituicao_id?: string; 
-  tarefa_id?: string; 
+  startDate?: string;
+  endDate?: string;
+  cliente_id?: string;
+  instituicao_id?: string;
+  tarefa_id?: string;
+  status_id?: string;
+  tipoOS_id?: string;
 }
 
 class ListOrdemdeServicoService {
-  async execute({ 
-    user_id, 
-    startDate, 
-    endDate, 
-    cliente_id, 
-    instituicao_id, 
-    tarefa_id 
+  async execute({
+    user_id,
+    startDate,
+    endDate,
+    cliente_id,
+    instituicao_id,
+    tarefa_id,
+    status_id,
+    tipoOS_id,
   }: ListRequest) {
     
     const user = await prismaClient.user.findFirst({
@@ -74,9 +78,16 @@ class ListOrdemdeServicoService {
       whereCondition.instituicaoUnidade_id = instituicao_id;
     }
 
-    // Novo filtro de Tarefa incorporado
     if (tarefa_id) {
       whereCondition.tarefa_id = tarefa_id;
+    }
+
+    if (status_id) {
+      whereCondition.statusOrdemdeServico_id = status_id;
+    }
+
+    if (tipoOS_id) {
+      whereCondition.tipodeOrdemdeServico_id = tipoOS_id;
     }
 
     // Busca principal com os filtros acumulados
