@@ -41,7 +41,12 @@ export default function Calendar({ initialToken, events }: CalendarProps) {
 
       return {
         id: os.id,
-        text: `OS ${os.numeroOS}: ${os.cliente?.name || "Chamado"}`,
+        text:
+          os.instituicaoUnidade?.name ||
+          os.informacoesSetor?.instituicaoUnidade?.name ||
+          os.user?.instituicaoUnidade?.name ||
+          os.cliente?.name ||
+          `OS ${os.numeroOS}`,
         start_date: startDate,
         end_date: new Date(startDate.getTime() + 30 * 60 * 1000),
         color: os.statusOrdemdeServico?.name === "CONCLUIDA" ? "#10b981" : "#f59e0b",
